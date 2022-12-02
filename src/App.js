@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import Parent from "./Component/Parent/Parent";
+import './App.css'
+import { createContext, useState } from "react";
+import Reducer from "./Component/Reducer/Reducer";
 
+export const COUNT_REDUCER = createContext()
 function App() {
+  const [count, setCount] = useState(1);
+  const value = {count, setCount}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <COUNT_REDUCER.Provider value={value}>
+      <div className='App'>
+        <h1>Start Redux</h1>
+        <h2>Grand Parent {count}</h2>
+        <Parent count={count} setCount={setCount}></Parent>
+        <Reducer></Reducer>
+      </div>
+    </COUNT_REDUCER.Provider>
   );
 }
 
